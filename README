@@ -10,9 +10,12 @@ W : Reverse gravity
 SPACE: Player jump.
 M: Show/Hide menu layer.
 Left Mouse Click: Attack.
+Right mouse click: Spawn block.
 
 
 To Do List:
+-Add boundaries or sensors to world edges to trigger events if objects collide with them.
+-Remove blocks that collide with the boundaries and prevent blocks from falling through the ground.
 -Prevent player from jumping more than once.
 -Add basic enemy AI.
 -Procedural world gen? Tile destruction?
