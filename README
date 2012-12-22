@@ -16,7 +16,7 @@ Right mouse click: Spawn block.
 To Do List:
 -Add boundaries or sensors to world edges to trigger events if objects collide with them.
 -Remove blocks that collide with the boundaries and prevent blocks from falling through the ground.
--Prevent player from jumping more than once.
+-Prevent player from jumping if he is already in the air.
 -Add basic enemy AI.
 -Procedural world gen? Tile destruction?
 ...in progress.
