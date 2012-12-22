@@ -34,6 +34,7 @@ class Level(cocos.layer.ScrollableLayer):
         self.platform = pymunk.Segment(self.space.static_body, (0, 64), (3200, 64), 1)
         self.platform.friction = 5
         self.floor = cocos.draw.Line((0,64), (3200,64), (255,255,255,255), 5)
+        self.floor.visible = False
 
         #Create actors and other physics objects.
         self.player = player.Player()
