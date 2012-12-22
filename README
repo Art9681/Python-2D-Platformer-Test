@@ -1,3 +1,17 @@
 Python game development. 
 
 Requires Pyglet, Cocos2D, PyCharm and NumPy libraries.
+
+Controls:
+A,D : Move player left or right.
+W : Reverse gravity
+SPACE: Player jump.
+M: Show/Hide menu layer.
+Left Mouse Click: Attack.
+
+
+To Do List:
+-Prevent player from jumping more than once.
+-Add basic enemy AI.
+...in progress.
+

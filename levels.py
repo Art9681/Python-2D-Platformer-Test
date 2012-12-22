@@ -1,7 +1,7 @@
 from pyglet.window import key, mouse
 from pyglet.gl import *
 import cocos
-from cocos import layer
+from cocos import layer, tiles
 from cocos.particle import *
 from cocos.particle_systems import *
 import pymunk
@@ -12,11 +12,9 @@ import npc
 import scenes
 
 class Level(cocos.layer.ScrollableLayer):
-    global space
     is_event_handler = True
     def __init__(self, clock):
         super( Level, self ).__init__()
-        global scroller
 
         self.clock = clock
         self.dt = 1/60
@@ -174,10 +172,18 @@ class Level(cocos.layer.ScrollableLayer):
             #Remove the sword physics objects after a certain interval.
             self.clock.schedule_once(self.remove_sword, 1.0)
 
-        if button == mouse.RIGHT:
-            global scroller
-            self.pos = scroller.pixel_from_screen(x,y)
-            self.block1 = blocks.Block(pos = self.pos)
-            self.block_group.append(self.block1)
-            self.add(self.block1)
 
+class Scroller(cocos.layer.ScrollingManager):
+    def __init__(self, clock):
+        super(Scroller, self).__init__()
+
+        self.level1 = Level(clock)
+        #Add the tilemap and the level to the scrolling manager
+        self.resource = cocos.tiles.load('map.tmx')
+        self.map = self.resource.get_resource('Tile Layer 1')
+        self.add(self.map)
+        self.add(self.level1)
+
+    def update(self, dt):
+        self.level1.update(dt)
+        self.set_focus(*self.level1.player.player_sprite.position)
