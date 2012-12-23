@@ -1,22 +1,27 @@
 import cocos
 from pyglet.window import key
 
+
+#The Interface layer controls the visibility and other attributes of interface elements and menus.
+#We remove the menu object when not visible so events dont register.
 class Interface(cocos.layer.Layer):
     is_event_handler = True
 
     def __init__(self):
         super( Interface, self ).__init__()
-
         self.dev_menu = MenuDev()
-        self.add(self.dev_menu.menu)
 
     def on_key_press(self, symbol, modifiers):
         #Set the layer visibility if the M key is pressed. Brings up the menu and closes it.
         if symbol == key.M:
             if self.dev_menu.menu.visible == True:
                 self.dev_menu.menu.visible = False
+                self.remove(self.dev_menu.menu)
+                #self.dev_menu.menu.remove_all_handlers()
             elif self.dev_menu.menu.visible == False:
                 self.dev_menu.menu.visible = True
+                self.add(self.dev_menu.menu)
+                #self.dev_menu.menu.push_all_handlers()
 
 class MenuDev(object):
     def __init__(self):

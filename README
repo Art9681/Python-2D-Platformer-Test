@@ -1,4 +1,4 @@
-Python 2D game development.
+Eden2D (Python 2D Game Script)
 
 Requires Pyglet, Cocos2D, PyCharm and NumPy libraries.
 
@@ -13,9 +13,14 @@ M: Show/Hide menu layer.
 Left Mouse Click: Attack.
 Right mouse click: Spawn block.
 
+Recent changes:
+-Added colliding map boundaries on left and right edges.
+-The menu does not register events when it is not visible.
+
 
 To Do List:
--Add boundaries or sensors to world edges to trigger events if objects collide with them.
+-Add menu to select objects to add to the world such as pymunk segments or shapes.
+-Add mouse event to create pymunk segments in-game.
 -Remove blocks that collide with the boundaries and prevent blocks from falling through the ground.
 -Prevent player from jumping if he is already in the air.
 -Add basic enemy AI.

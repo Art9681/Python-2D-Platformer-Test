@@ -30,6 +30,12 @@ class Level(cocos.layer.ScrollableLayer):
         self.space.collision_slop = 0.3
         self.space.gravity = (0,-700)
 
+        #The map boundaries.
+        self.boundary_left = pymunk.Segment(self.space.static_body, (0, 0), (0, 500), 1)
+        self.boundary_left.friction = 10
+        self.boundary_right = pymunk.Segment(self.space.static_body, (3200, 0), (3200, 500), 1)
+        self.boundary_right.friction = 10
+
         #The platform object.
         self.platform = pymunk.Segment(self.space.static_body, (0, 64), (3200, 64), 1)
         self.platform.friction = 5
@@ -61,6 +67,8 @@ class Level(cocos.layer.ScrollableLayer):
 
         #Add physics objects to our space.
         self.space.add(
+                        self.boundary_left,
+                        self.boundary_right,
                         self.platform,
                         self.player.body,
                         self.player.shape,
@@ -183,6 +191,7 @@ class Level(cocos.layer.ScrollableLayer):
             self.space.add(self.block1.body, self.block1.shape)
 
 
+#Handles the scrolling manager. Physics layers get added to this and this class gets added to the scene.
 class Scroller(object):
     def __init__(self, clock):
         super(Scroller, self).__init__()
