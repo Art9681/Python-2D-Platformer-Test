@@ -27,6 +27,8 @@ class Player(object):
         self.player_moving_down = False
         self.player_moving_left = False
         self.player_moving_right = False
+
+        #If this flag is set to True, allow the player to jump.
         self.on_ground = False
 
         #Load the player sprite sheet.

@@ -33,12 +33,14 @@ class Level(cocos.layer.ScrollableLayer):
         #The map boundaries.
         self.boundary_left = pymunk.Segment(self.space.static_body, (0, 0), (0, 500), 1)
         self.boundary_left.friction = 10
+        self.boundary_left.collision_type = 4
         self.boundary_right = pymunk.Segment(self.space.static_body, (3200, 0), (3200, 500), 1)
         self.boundary_right.friction = 10
 
         #The platform object.
         self.platform = pymunk.Segment(self.space.static_body, (0, 64), (3200, 64), 1)
         self.platform.friction = 5
+        self.platform.collision_type = 4
         self.floor = cocos.draw.Line((0,64), (3200,64), (255,255,255,255), 5)
         self.floor.visible = False
 
@@ -79,7 +81,18 @@ class Level(cocos.layer.ScrollableLayer):
 
         #The collision handler. When the objects with the defined collision types collide,
         #The handler fires the methods defined here.
+        #Collision types are as follows:
+        #Ground and Walls = 4
+        #Sword = 2
+        #Zombie = 3
+        self.space.add_collision_handler(1, 4, begin = self.player_ground, pre_solve = None, post_solve = None)
         self.space.add_collision_handler(2, 3, begin = self.zombie_dead, pre_solve = None, post_solve = None)
+
+
+    def player_ground(self, space, arbiter):
+        self.player.on_ground = True
+        print self.player.on_ground
+        return True
 
     #This runs when the sword collides with the enemy.
     def zombie_dead(self, space, arbiter):
@@ -122,9 +135,10 @@ class Level(cocos.layer.ScrollableLayer):
     #Detects key presses and releases and fires events accordingly.
     def on_key_press(self, symbol, modifiers):
         if symbol == key.SPACE:
-            #Make the player jump!
-            self.player.body.apply_impulse(pymunk.Vec2d(0, 40000), (0, 0))
-            self.player.on_ground = False
+            if self.player.on_ground == True:
+                #Make the player jump!
+                self.player.body.apply_impulse(pymunk.Vec2d(0, 40000), (0, 0))
+                self.player.on_ground = False
         if symbol == key.D:
             self.player.direction = True
             #self.sword.direction = True

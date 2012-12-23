@@ -16,13 +16,14 @@ Right mouse click: Spawn block.
 Recent changes:
 -Added colliding map boundaries on left and right edges.
 -The menu does not register events when it is not visible.
+-Fixed player jumping multiple times in the air. Only jumps once now.
+-Added player jumping on walls.
 
 
 To Do List:
 -Add menu to select objects to add to the world such as pymunk segments or shapes.
 -Add mouse event to create pymunk segments in-game.
 -Remove blocks that collide with the boundaries and prevent blocks from falling through the ground.
--Prevent player from jumping if he is already in the air.
 -Add basic enemy AI.
 -Procedural world gen? Tile destruction?
 ...in progress.
