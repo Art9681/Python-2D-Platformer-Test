@@ -19,7 +19,7 @@ Recent changes:
 -Fixed player jumping multiple times in the air. Only jumps once now.
 -Added player jumping on walls.
 -Press "M" to bring up menu and select items to spawn with right click. If
-you select segment, the first two richt clicks register the point locations,
+you select segment, the first two right clicks register the point locations,
 and the third click spawns the segment. I will fix this later.
 
 
