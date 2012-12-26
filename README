@@ -18,10 +18,13 @@ Recent changes:
 -The menu does not register events when it is not visible.
 -Fixed player jumping multiple times in the air. Only jumps once now.
 -Added player jumping on walls.
+-Press "M" to bring up menu and select items to spawn with right click. If
+you select segment, the first two richt clicks register the point locations,
+and the third click spawns the segment. I will fix this later.
 
 
 To Do List:
--Add menu to select objects to add to the world such as pymunk segments or shapes.
+-Implement a pause handler.
 -Add mouse event to create pymunk segments in-game.
 -Remove blocks that collide with the boundaries and prevent blocks from falling through the ground.
 -Add basic enemy AI.

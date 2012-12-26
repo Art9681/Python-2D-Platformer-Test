@@ -5,11 +5,11 @@ from cocos import layer, tiles
 from cocos.particle import *
 from cocos.particle_systems import *
 import pymunk
+import interface
 import player
 import items
 import blocks
 import npc
-import scenes
 
 class Level(cocos.layer.ScrollableLayer):
     global scroller
@@ -56,6 +56,7 @@ class Level(cocos.layer.ScrollableLayer):
 
         self.block_group = []
         self.sword_group = []
+        self.vertices = []
 
         #Create the batch node to minimize the number of gl calls. Basically puts sprites in a group and
         #renders all of them at once or something like that.
@@ -91,7 +92,6 @@ class Level(cocos.layer.ScrollableLayer):
 
     def player_ground(self, space, arbiter):
         self.player.on_ground = True
-        print self.player.on_ground
         return True
 
     #This runs when the sword collides with the enemy.
@@ -198,11 +198,26 @@ class Level(cocos.layer.ScrollableLayer):
 
         #Spawn a block at the location of the mouse.
         if button == mouse.RIGHT:
-            self.pos = scroller.pixel_from_screen(x, y)
-            self.block1 = blocks.Block(pos = self.pos)
-            self.block_group.append(self.block1)
-            self.add(self.block1.block_img)
-            self.space.add(self.block1.body, self.block1.shape)
+            if interface.MenuDev.spawn == "segment":
+                if len(self.vertices)<2:
+                    self.vertices.append(scroller.pixel_from_screen(x, y))
+                else:
+                    self.line_x = self.vertices[0]
+                    self.line_y = self.vertices[1]
+                    self.wall = cocos.draw.Line(self.line_x, self.line_y, (255,255,255,255), 5)
+                    self.add(self.wall)
+                    self.vertices.pop(1)
+                    self.vertices.pop(0)
+
+                    self.platform = pymunk.Segment(self.space.static_body, self.line_x, self.line_y, 1)
+                    self.space.add(self.platform)
+                print self.vertices
+            if interface.MenuDev.spawn == "block":
+                self.pos = scroller.pixel_from_screen(x, y)
+                self.block1 = blocks.Block(pos = self.pos)
+                self.block_group.append(self.block1)
+                self.add(self.block1.block_img)
+                self.space.add(self.block1.body, self.block1.shape)
 
 
 #Handles the scrolling manager. Physics layers get added to this and this class gets added to the scene.

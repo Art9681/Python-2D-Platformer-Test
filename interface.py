@@ -1,7 +1,6 @@
 import cocos
 from pyglet.window import key
 
-
 #The Interface layer controls the visibility and other attributes of interface elements and menus.
 #We remove the menu object when not visible so events dont register.
 class Interface(cocos.layer.Layer):
@@ -21,9 +20,11 @@ class Interface(cocos.layer.Layer):
             elif self.dev_menu.menu.visible == False:
                 self.dev_menu.menu.visible = True
                 self.add(self.dev_menu.menu)
-                #self.dev_menu.menu.push_all_handlers()
 
 class MenuDev(object):
+    #The item that will spawn based on what was selected in the menu.
+    spawn = ""
+
     def __init__(self):
         super( MenuDev, self ).__init__()
 
@@ -32,13 +33,19 @@ class MenuDev(object):
         self.menu.visible = False
 
         #Then add the items.
-        self.item1 = cocos.menu.MenuItem('First menu item guys!', self.pmenu)
+        self.block = cocos.menu.MenuItem('Create Block', self.create_block)
+        self.segment = cocos.menu.MenuItem('Create Segment', self.create_segment)
 
-        #Now creat the menu.
-        self.menu.create_menu( [ self.item1] )
+        #Now create the menu.
+        self.menu.create_menu([self.block, self.segment])
 
-    def pmenu(self):
-        print "Menu item1 clicked."
+    def create_block(self):
+        MenuDev.spawn = "block"
+        print "Create block clicked!"
+
+    def create_segment(self):
+        MenuDev.spawn = "segment"
+        print "Create segment clicked!"
 
 
     def on_toggle_callback(self, b ):

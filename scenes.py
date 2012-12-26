@@ -19,8 +19,9 @@ class MyGame(cocos.scene.Scene):
         self.scroller = levels.Scroller(self.clock)
 
         #Add the layers to the scene.
-        self.add(self.scroller.scroller)
-        self.add(self.interface)
+        self.add(self.interface, z=1)
+        self.add(self.scroller.scroller, z=0)
+
 
         self.clock.schedule(self.scroller.update)
 
