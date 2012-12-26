@@ -202,14 +202,14 @@ class Level(cocos.layer.ScrollableLayer):
                 if len(self.vertices)<2:
                     self.vertices.append(scroller.pixel_from_screen(x, y))
                 else:
-                    self.line_x = self.vertices[0]
-                    self.line_y = self.vertices[1]
-                    self.wall = cocos.draw.Line(self.line_x, self.line_y, (255,255,255,255), 5)
+                    self.vertice_first = self.vertices[0]
+                    self.vertice_second = self.vertices[1]
+                    self.wall = cocos.draw.Line(self.vertice_first, self.vertice_second, (255,255,255,255), 5)
                     self.add(self.wall)
                     self.vertices.pop(1)
                     self.vertices.pop(0)
 
-                    self.platform = pymunk.Segment(self.space.static_body, self.line_x, self.line_y, 1)
+                    self.platform = pymunk.Segment(self.space.static_body, self.vertice_first, self.vertice_second, 1)
                     self.space.add(self.platform)
                 print self.vertices
             if interface.MenuDev.spawn == "block":
