@@ -9,9 +9,9 @@ A,D : Move player left or right.
 SPACE: Player jump.
 W: Reverse gravity
 V: Show/Hide pymunk shapes using GL calls. (currently only the ground segment).
-M: Show/Hide menu layer.
+M: Show/Hide menu.
 Left Mouse Click: Attack.
-Right mouse click: Spawn block.
+Right mouse click: Spawn item. (Select item from menu)
 
 Recent changes:
 -Added colliding map boundaries on left and right edges.
