@@ -14,6 +14,7 @@ Left Mouse Click: Attack.
 Right mouse click: Spawn item. (Select item from menu)
 
 Recent changes:
+-Added very basic enemy pathfinding.
 -Added colliding map boundaries on left and right edges.
 -The menu does not register events when it is not visible.
 -Fixed player jumping multiple times in the air. Only jumps once now.

@@ -125,7 +125,7 @@ class Level(cocos.layer.ScrollableLayer):
         self.space.step(dt)
         self.player.update()
         self.block.update()
-        self.zombie.update()
+        self.zombie.update(self.player.body.position)
 
         for sword in self.sword_group:
             sword.update(self.player.body.position)

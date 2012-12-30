@@ -64,12 +64,21 @@ class Zombie(object):
     def walk_right(self):
         if self.enemy_img.image != self.enemy_anim_right:
             self.enemy_img.image = self.enemy_anim_right
+        self.body.velocity.x = 100
 
     def walk_left(self):
         if self.enemy_img.image != self.enemy_anim_left:
             self.enemy_img.image = self.enemy_anim_left
+        self.body.velocity.x = -100
 
-    def update(self):
+    def pathfind(self, player):
+        if player.x < self.body.position.x:
+            self.walk_left()
+        else:
+            self.walk_right()
+
+    def update(self, player):
         #Bind the sprite's position to the pymunk object.
         self.enemy_img.position = self.body.position
+        self.pathfind(player)
 
